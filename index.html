@@ -24,7 +24,6 @@
             align-items: center;
             padding: 20px;
         }
-        /* ヘッダーエリア */
         header {
             width: 100%;
             display: flex;
@@ -32,11 +31,31 @@
             align-items: center;
             z-index: 10;
         }
-        .header-center {
-            text-align: center;
+        .center-stats {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            align-items: center;
+            gap: 2px;
+        }
+        #best-roll-display {
+            font-size: 26px;
+            font-weight: bold;
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        #total-rolls {
+            font-size: 16px;
+            color: #8b949e;
+        }
+        .right-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        #coin-display {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffcc00;
         }
         .btn {
             background-color: #21262d;
@@ -48,35 +67,7 @@
             font-weight: bold;
             transition: background 0.2s;
         }
-        .btn:hover {
-            background-color: #30363d;
-        }
-        #best-roll-display {
-            font-size: 24px;
-            font-weight: bold;
-            color: #ffd700;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-        }
-        #total-rolls {
-            font-size: 16px;
-            color: #8b949e;
-            font-weight: bold;
-        }
-        .stats-group {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        #coin-display {
-            font-size: 18px;
-            font-weight: bold;
-            color: #ffcc00;
-            background: rgba(255, 204, 0, 0.1);
-            padding: 6px 12px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 204, 0, 0.2);
-        }
-        /* 中央表示エリア */
+        .btn:hover { background-color: #30363d; }
         main {
             flex: 1;
             display: flex;
@@ -86,19 +77,15 @@
         }
         #result-card {
             text-align: center;
-            animation: popIn 0.3s ease-out;
         }
         #result-number {
-            font-size: 64px;
+            font-size: 56px;
             font-weight: 900;
             color: #fff;
-            text-shadow: 0 0 20px rgba(255,255,255,0.2);
-            transition: color 0.2s;
             word-break: break-all;
-            max-width: 90vw;
-            line-height: 1.2;
+            padding: 0 20px;
+            transition: color 0.2s;
         }
-        /* 最下部操作エリア */
         footer {
             width: 100%;
             max-width: 500px;
@@ -122,11 +109,9 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            transition: opacity 0.2s, transform 0.1s;
+            transition: transform 0.1s;
         }
-        .action-btn:active {
-            transform: scale(0.98);
-        }
+        .action-btn:active { transform: scale(0.98); }
         #roll-btn {
             background: linear-gradient(135deg, #238636, #2ea44f);
             color: white;
@@ -140,10 +125,7 @@
             background: #388bfd;
             color: white;
         }
-        #auto-btn.active {
-            background: #da3633;
-        }
-        /* クールダウンバー */
+        #auto-btn.active { background: #da3633; }
         .cooldown-container {
             width: 100%;
             height: 6px;
@@ -157,7 +139,6 @@
             background-color: #2ea44f;
             transition: width linear;
         }
-        /* パネル共通 */
         .panel {
             position: fixed;
             top: 0;
@@ -175,7 +156,6 @@
         #inventory-panel.open { transform: translateX(0); }
         #upgrade-panel { right: 0; transform: translateX(100%); border-right: none; border-left: 1px solid #30363d; box-shadow: -5px 0 15px rgba(0,0,0,0.5); }
         #upgrade-panel.open { transform: translateX(0); }
-        
         .panel-header {
             padding: 20px;
             border-bottom: 1px solid #30363d;
@@ -197,7 +177,6 @@
         }
         .upg-card h4 { color: #fff; margin-bottom: 5px; }
         .upg-card p { font-size: 13px; color: #8b949e; margin-bottom: 10px; }
-        
         @keyframes popIn {
             0% { transform: scale(0.9); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
@@ -205,28 +184,22 @@
     </style>
 </head>
 <body>
-
-    <!-- ヘッダー -->
     <header>
         <button class="btn" id="open-inv-btn" onclick="togglePanel('inventory-panel', true)">🎒 インベントリ</button>
-        <div class="header-center">
+        <div class="center-stats">
             <div id="best-roll-display">👑 Best: 1</div>
             <div id="total-rolls">⭐ Total Rolls: 0</div>
         </div>
-        <div class="stats-group">
+        <div class="right-group">
             <div id="coin-display">🪙 0</div>
             <button class="btn" onclick="togglePanel('upgrade-panel', true)">🆙 強化</button>
         </div>
     </header>
-
-    <!-- 中央ガチャ表示 -->
     <main>
         <div id="result-card">
             <div id="result-number">1</div>
         </div>
     </main>
-
-    <!-- 最下部操作UI -->
     <footer>
         <div class="controls">
             <button class="action-btn" id="roll-btn" onclick="triggerRoll()">ROLL</button>
@@ -236,8 +209,6 @@
             <div id="cooldown-bar"></div>
         </div>
     </footer>
-
-    <!-- 左インベントリパネル -->
     <div class="panel" id="inventory-panel">
         <div class="panel-header">
             <h3>🎒 インベントリ</h3>
@@ -245,8 +216,6 @@
         </div>
         <div class="panel-content" id="inventory-list"></div>
     </div>
-
-    <!-- 右アップグレードツリーパネル -->
     <div class="panel" id="upgrade-panel">
         <div class="panel-header">
             <h3>🆙 無限強化ツリー</h3>
@@ -267,33 +236,28 @@
             </div>
         </div>
     </div>
-
     <script>
-        // 超インフレレアリティプール (最大 Septillion = 10^24)
         const pool = [
-            { value: "1,000,000,000,000,000,000,000,000", num: 1e24, color: '#ff3e6c' }, // Septillion
-            { value: "1,000,000,000,000,000,000,000",     num: 1e21, color: '#ff4500' }, // Sextillion
-            { value: "1,000,000,000,000,000,000",         num: 1e18, color: '#ff8800' }, // Quintillion
-            { value: "1,000,000,000,000,000",             num: 1e15, color: '#ffcc00' }, // Quadrillion
-            { value: "1,000,000,000,000",                 num: 1e12, color: '#d3ff00' }, // Trillion
-            { value: "1,000,000,000",                     num: 1e9,  color: '#00ffcc' }, // Billion
-            { value: "1,000,000",                         num: 1e6,  color: '#a371f7' }, // Million
-            { value: "100,000",                           num: 1e5,  color: '#58a6ff' },
-            { value: "10,000",                            num: 1e4,  color: '#3fb950' },
-            { value: "1,000",                             num: 1000, color: '#1f6feb' },
-            { value: "100",                               num: 100,  color: '#536eff' },
-            { value: "25",                                num: 25,   color: '#6e7681' },
-            { value: "10",                                num: 10,   color: '#8b949e' },
-            { value: "5",                                 num: 5,    color: '#aaaaaa' },
-            { value: "1",                                 num: 1,    color: '#ffffff' }
+            { value: 1000000000000000000000000, chance: 1 / 1000000000000000000000000, color: '#ff3e3e' },
+            { value: 1000000000000000000000,    chance: 1 / 1000000000000000000000,    color: '#ff6b6b' },
+            { value: 1000000000000000000,       chance: 1 / 1000000000000000000,       color: '#ff9494' },
+            { value: 1000000000000000,          chance: 1 / 1000000000000000,          color: '#ffbaba' },
+            { value: 1000000000000,             chance: 1 / 1000000000000,             color: '#ff7b00' },
+            { value: 1000000000,                chance: 1 / 1000000000,                color: '#ffcc00' },
+            { value: 1000000,                   chance: 1 / 1000000,                   color: '#a371f7' },
+            { value: 100000,                    chance: 1 / 100000,                    color: '#58a6ff' },
+            { value: 10000,                     chance: 1 / 10000,                     color: '#3fb950' },
+            { value: 1000,                      chance: 1 / 1000,                      color: '#1f6feb' },
+            { value: 100,                       chance: 1 / 100,                       color: '#6e7681' },
+            { value: 25,                        chance: 1 / 25,                        color: '#8b949e' },
+            { value: 5,                         chance: 1 / 5,                         color: '#c9d1d9' },
+            { value: 1,                         chance: 1 / 1,                         color: '#ffffff' }
         ];
 
-        // ビッグナンバー同士の文字列等価チェック等のためのベースキー
         let state = {
             rolls: 0,
+            bestRoll: 1,
             coins: 0,
-            bestRoll: "1",
-            bestRollNum: 1,
             inventory: {},
             upgrades: { speed: 0, luck: 0 }
         };
@@ -302,20 +266,16 @@
         let isAuto = false;
 
         function saveGame() {
-            localStorage.setItem('rng_game_save_septillion_coins', JSON.stringify(state));
+            localStorage.setItem('rng_game_save_final', JSON.stringify(state));
         }
 
         function loadGame() {
-            const saved = localStorage.getItem('rng_game_save_septillion_coins');
+            const saved = localStorage.getItem('rng_game_save_final');
             if (saved) {
                 try {
-                    const parsed = JSON.parse(saved);
-                    if (parsed.rolls !== undefined) state.rolls = parsed.rolls;
-                    if (parsed.coins !== undefined) state.coins = parsed.coins;
-                    if (parsed.bestRoll !== undefined) state.bestRoll = parsed.bestRoll;
-                    if (parsed.bestRollNum !== undefined) state.bestRollNum = parsed.bestRollNum;
-                    if (parsed.inventory) state.inventory = parsed.inventory;
-                    if (parsed.upgrades) state.upgrades = parsed.upgrades;
+                    state = JSON.parse(saved);
+                    if (!state.inventory) state.inventory = {};
+                    if (!state.upgrades) state.upgrades = { speed: 0, luck: 0 };
                 } catch(e) { console.error(e); }
             }
             updateUI();
@@ -332,35 +292,26 @@
             return Math.max(200, 1000 - (state.upgrades.speed * 80)); 
         }
 
-        // 幸運マルチプライヤー
         function getLuckMultiplier() {
-            return 1 + (state.upgrades.luck * 0.35);
+            return 3 + (state.upgrades.luck * 0.5);
         }
 
-        // 指数関数コスト計算（コインベース）
         function getUpgradeCost(type) {
             const lv = state.upgrades[type];
-            if (type === 'speed') return Math.floor(10 * Math.pow(2.2, lv));
-            if (type === 'luck') return Math.floor(15 * Math.pow(2.5, lv));
-        }
-
-        // フォーマット表示用関数
-        function formatNumber(num) {
-            return num.toLocaleString();
+            if (type === 'speed') return Math.floor(10 * Math.pow(1.8, lv));
+            if (type === 'luck') return Math.floor(15 * Math.pow(2.0, lv));
         }
 
         function updateUI() {
             document.getElementById('total-rolls').innerText = `⭐ Total Rolls: ${state.rolls.toLocaleString()}`;
-            document.getElementById('best-roll-display').innerText = `👑 Best: ${state.bestRoll}`;
-            document.getElementById('coin-display').innerText = `🪙 ${formatNumber(state.coins)}`;
+            document.getElementById('best-roll-display').innerText = `👑 Best: ${state.bestRoll.toLocaleString()}`;
+            document.getElementById('coin-display').innerText = `🪙 ${state.coins.toLocaleString()}`;
             
-            // 強化表示
             document.getElementById('speed-level').innerText = `Lv.${state.upgrades.speed}`;
-            document.getElementById('buy-speed-btn').innerText = `コスト: ${formatNumber(getUpgradeCost('speed'))} 🪙`;
-            document.getElementById('luck-level').innerText = `Lv.${state.upgrades.luck} (+${Math.round((getLuckMultiplier()-1)*100)}%)`;
-            document.getElementById('buy-luck-btn').innerText = `コスト: ${formatNumber(getUpgradeCost('luck'))} 🪙`;
+            document.getElementById('buy-speed-btn').innerText = `コスト: ${getUpgradeCost('speed').toLocaleString()} 🪙`;
+            document.getElementById('luck-level').innerText = `Lv.${state.upgrades.luck} (幸運: +${Math.round((getLuckMultiplier()) * 100)}%)`;
+            document.getElementById('buy-luck-btn').innerText = `コスト: ${getUpgradeCost('luck').toLocaleString()} 🪙`;
 
-            // インベントリ表示
             const invList = document.getElementById('inventory-list');
             invList.innerHTML = '';
             pool.forEach(p => {
@@ -369,7 +320,7 @@
                     const row = document.createElement('div');
                     row.className = 'item-row';
                     row.style.borderLeft = `5px solid ${p.color}`;
-                    row.innerHTML = `<span style="color:${p.color}; font-weight:bold;">${p.value}</span> : ${count.toLocaleString()} 個`;
+                    row.innerHTML = `<span style="color:${p.color}; font-weight:bold;">${p.value.toLocaleString()}</span> : ${count.toLocaleString()} 個`;
                     invList.appendChild(row);
                 }
             });
@@ -383,7 +334,7 @@
                 saveGame();
                 updateUI();
             } else {
-                alert("コインが足りません！");
+                alert("コイン(🪙)が足りません！ガチャを回して数字を稼ぎましょう！");
             }
         }
 
@@ -395,45 +346,36 @@
             state.rolls++;
             
             const luck = getLuckMultiplier();
-            let rolledItem = pool[pool.length - 1]; // デフォルトは1
+            let rolledItem = pool[pool.length - 1]; 
 
             for (let i = 0; i < pool.length; i++) {
-                // 基礎確率にLuck倍率を乗算
-                let finalChance = (1 / pool[i].num) * luck;
-                if (Math.random() < finalChance) {
+                if (Math.random() < (pool[i].chance * luck)) {
                     rolledItem = pool[i];
                     break;
                 }
             }
 
-            // 引いた数値をコインとして加算！
-            state.coins += rolledItem.num;
-
-            // インベントリ登録
+            state.coins += rolledItem.value;
             state.inventory[rolledItem.value] = (state.inventory[rolledItem.value] || 0) + 1;
             
-            // 最高記録チェック
-            if (rolledItem.num > state.bestRollNum) {
-                state.bestRollNum = rolledItem.num;
+            if (rolledItem.value > state.bestRoll) {
                 state.bestRoll = rolledItem.value;
             }
             
             saveGame();
 
-            // 演出
             const display = document.getElementById('result-number');
-            display.innerText = rolledItem.value;
+            display.innerText = rolledItem.value.toLocaleString();
             display.style.color = rolledItem.color;
             display.style.textShadow = `0 0 25px ${rolledItem.color}`;
             
             const card = document.getElementById('result-card');
             card.style.animation = 'none';
-            card.offsetHeight;
-            card.style.animation = 'popIn 0.2s ease-out';
+            card.offsetHeight; 
+            card.style.animation = 'popIn 0.15s ease-out';
 
             updateUI();
 
-            // クールダウンゲージ
             const cdTime = getBaseCooldown();
             const bar = document.getElementById('cooldown-bar');
             bar.style.transition = 'none';
