@@ -192,7 +192,7 @@
         </div>
         <div class="right-group">
             <div id="coin-display">🪙 0</div>
-            <button class="btn" onclick="togglePanel('upgrade-panel', true)">🆙 強化</button>
+            <button class="btn" onclick="togglePanel('upgrade-panel', true)">🚽 強化</button>
         </div>
     </header>
     <main>
@@ -224,13 +224,13 @@
         <div class="panel-content">
             <div class="upg-card">
                 <h4>⚡ スピード加速器 （？）</h4>
-                <p>ロールの待ち時間を短縮します。</p>
+                <p>ロールのクールダウンを減らします。</p>
                 <div id="speed-level">Lv.0</div>
                 <button class="btn" style="width:100%; margin-top:8px;" id="buy-speed-btn" onclick="buyUpgrade('speed')">コスト: 10 🪙</button>
             </div>
             <div class="upg-card">
                 <h4>🍀 ラック上昇機 （？）</h4>
-                <p>より大きな数字が出やすくなります。</p>
+                <p>よりいいやつが出やすくなります。</p>
                 <div id="luck-level">Lv.0</div>
                 <button class="btn" style="width:100%; margin-top:8px;" id="buy-luck-btn" onclick="buyUpgrade('luck')">コスト: 15 🪙</button>
             </div>
@@ -238,15 +238,15 @@
     </div>
     <script>
         const pool = [
-            { value: 1000000000000000000000000, chance: 1 / 100000000000000000000000, color: '#ff3e3e' },
-            { value: 1000000000000000000000,    chance: 1 / 100000000000000000000,    color: '#ff6b6b' },
-            { value: 1000000000000000000,       chance: 1 / 100000000000000000,       color: '#ff9494' },
-            { value: 1000000000000000,          chance: 1 / 100000000000000,          color: '#ffbaba' },
-            { value: 1000000000000,             chance: 1 / 100000000000,             color: '#ff7b00' },
-            { value: 1000000000,                chance: 1 / 100000000,                color: '#ffcc00' },
-            { value: 1000000,                   chance: 1 / 100000,                   color: '#a371f7' },
-            { value: 100000,                    chance: 1 / 10000,                    color: '#58a6ff' },
-            { value: 10000,                     chance: 1 / 1500,                     color: '#3fb950' },
+            { value: 1000000000000000000000000, chance: 1 / 10000000000000000000000, color: '#ff3e3e' },
+            { value: 1000000000000000000000,    chance: 1 / 10000000000000000000,    color: '#ff6b6b' },
+            { value: 1000000000000000000,       chance: 1 / 10000000000000000,       color: '#ff9494' },
+            { value: 1000000000000000,          chance: 1 / 10000000000000,          color: '#ffbaba' },
+            { value: 1000000000000,             chance: 1 / 10000000000,             color: '#ff7b00' },
+            { value: 1000000000,                chance: 1 / 10000000,                color: '#ffcc00' },
+            { value: 1000000,                   chance: 1 / 170000,                   color: '#a371f7' },
+            { value: 100000,                    chance: 1 / 7500,                    color: '#58a6ff' },
+            { value: 10000,                     chance: 1 / 1000,                     color: '#3fb950' },
             { value: 1000,                      chance: 1 / 800,                      color: '#1f6feb' },
             { value: 100,                       chance: 1 / 100,                       color: '#6e7681' },
             { value: 25,                        chance: 1 / 25,                        color: '#8b949e' },
